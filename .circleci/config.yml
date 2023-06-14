@@ -146,7 +146,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - add_staging_prod_deploy
       - deploy-dev-k8s:
           requires:
             - build-push-docker-image
