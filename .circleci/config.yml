@@ -79,6 +79,7 @@ jobs:
           command: |
             sudo apt update
             sudo apt install -y awscli docker
+            docker pull ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_SHA1}
             docker tag ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_SHA1} ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_TAG}
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
@@ -109,6 +110,7 @@ jobs:
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
             aws ecr get-login-password --region ${AWS_REGION_PROD} | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/
+            docker pull ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_SHA1}
             docker tag ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_SHA1} ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_TAG}
             docker push ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION_PROD}.amazonaws.com/<< pipeline.parameters.project_name >>:${CIRCLE_TAG}
       - run:
