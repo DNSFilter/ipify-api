@@ -43,7 +43,7 @@ command: "/app/ip"
 ##################################################
 
 # Addtional pod annotations
-serviceAccountName: api-dev-sa #Precreated serviceAccount to be used based on api-dev, if you want to use your own, define the role ahead
+serviceAccountName: api-stg-sa #Precreated serviceAccount to be used based on api-dev, if you want to use your own, define the role ahead
 # serviceAccountAnnotations:
 #   eks.amazonaws.com/role-arn: arn:aws:iam::968519194283:role/eksctl-apps-non-prod-addon-iamserviceaccount-Role1-1AYKKWPYY59GQ
 
